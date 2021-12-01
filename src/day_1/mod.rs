@@ -28,14 +28,14 @@ fn part_1(lines: &[&str]) -> i32 {
 
 fn part_2(lines: &[&str]) -> i32 {
     let mut count = 0;
-    let mut prev = get_sliding_winding(lines, 0);
+    let mut prev = get_rolling_window(lines, 0);
 
     for (idx, _) in lines[1..lines.len()].iter().enumerate() {
         if idx + 2 > lines.len() - 1 {
             break;
         }
 
-        let num = get_sliding_winding(lines, idx);
+        let num = get_rolling_window(lines, idx);
         if prev < num {
             count += 1;
         }
@@ -45,7 +45,7 @@ fn part_2(lines: &[&str]) -> i32 {
     count
 }
 
-fn get_sliding_winding(lines: &[&str], start: usize) -> i32 {
+fn get_rolling_window(lines: &[&str], start: usize) -> i32 {
     lines[start..start + 3]
         .iter()
         .map(|line| line.parse::<i32>().unwrap())
