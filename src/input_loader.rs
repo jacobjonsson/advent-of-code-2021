@@ -9,7 +9,3 @@ pub fn read_input(p: &str) -> String {
     file.read_to_string(&mut input).unwrap();
     return input.trim_start().trim_end().to_string();
 }
-
-pub fn split_by_line(input: &str) -> Vec<&str> {
-    input.lines().collect()
-}
