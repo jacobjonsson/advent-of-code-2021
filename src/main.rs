@@ -1,6 +1,7 @@
 use std::time::Instant;
 
 mod day_1;
+mod day_2;
 mod input_loader;
 
 fn main() {
@@ -15,6 +16,7 @@ fn main() {
 
     match day.as_str() {
         "day_1" => day_1::run(),
+        "day_2" => day_2::run(),
 
         _ => panic!("Provided day does not exists"),
     };
