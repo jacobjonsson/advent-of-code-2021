@@ -1,8 +1,10 @@
-use std::time::Instant;
+mod input_loader;
 
 mod day_1;
 mod day_2;
-mod input_loader;
+mod day_3;
+
+use std::time::Instant;
 
 fn main() {
     let start = Instant::now();
@@ -17,6 +19,7 @@ fn main() {
     match day.as_str() {
         "day_1" => day_1::run(),
         "day_2" => day_2::run(),
+        "day_3" => day_3::run(),
 
         _ => panic!("Provided day does not exists"),
     };
