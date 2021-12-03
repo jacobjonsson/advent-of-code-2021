@@ -20,7 +20,11 @@ fn main() {
         "day_1" => day_1::run(),
         "day_2" => day_2::run(),
         "day_3" => day_3::run(),
-
+        "all" => {
+            day_1::run();
+            day_2::run();
+            day_3::run();
+        }
         _ => panic!("Provided day does not exists"),
     };
 
