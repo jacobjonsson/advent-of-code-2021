@@ -3,6 +3,7 @@ mod input_loader;
 mod day_1;
 mod day_2;
 mod day_3;
+mod day_4;
 
 use std::time::Instant;
 
@@ -20,10 +21,12 @@ fn main() {
         "day_1" => day_1::run(),
         "day_2" => day_2::run(),
         "day_3" => day_3::run(),
+        "day_4" => day_4::run(),
         "all" => {
             day_1::run();
             day_2::run();
             day_3::run();
+            day_4::run();
         }
         _ => panic!("Provided day does not exists"),
     };

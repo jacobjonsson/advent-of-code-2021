@@ -1,7 +1,5 @@
-use crate::input_loader::read_input;
-
 pub fn run() {
-    let input = ints(&read_input("src/day_1/input.txt"));
+    let input = ints(include_str!("./input.txt"));
 
     let part_1 = part_1(&input);
     let part_2 = part_2(&input);
