@@ -25,17 +25,22 @@ fn part_2(input: &str) -> i32 {
         .map(|s| s.parse::<i32>().unwrap())
         .collect();
 
+    let min = *positions.iter().min().unwrap();
+    let max = *positions.iter().max().unwrap();
     let mut cost = i32::MAX;
-    for pos in 0..positions.len() as i32 {
+
+    for pos in min..max as i32 {
         let new_cost = positions
             .iter()
             .map(|x| (x - pos).abs())
             .map(|n| n * (n + 1) / 2)
             .sum();
 
-        if new_cost < cost {
-            cost = new_cost;
+        if new_cost > cost {
+            break;
         }
+
+        cost = new_cost;
     }
 
     cost
