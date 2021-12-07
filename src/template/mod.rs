@@ -1,25 +1,16 @@
-use crate::input_loader::read_input;
-
 pub fn run() {
     let input = include_str!("./input.txt");
 
-    let part_1 = part_1(&input);
-    let part_2 = part_2(&input);
-
-    println!("[DAY 3] Part 1: {}", part_1);
-    println!("[DAY 3] Part 2: {}", part_2);
-}
-
-fn lines<'a>(input: &'a str) -> Vec<&'a str> {
-    input.lines().collect()
+    println!("[DAY _] Part 1: {}", part_1(&input));
+    println!("[DAY _] Part 2: {}", part_2(&input));
 }
 
 fn part_1(input: &str) -> usize {
-    todo!()
+    0
 }
 
 fn part_2(input: &str) -> usize {
-    todo!()
+    0
 }
 
 #[cfg(test)]
@@ -30,13 +21,13 @@ mod tests {
     fn test_part_1() {
         let input = "";
 
-        assert_eq!(part_1(&input), todo!());
+        assert_eq!(part_1(input), 1);
     }
 
     #[test]
     fn test_part_2() {
         let input = "";
 
-        assert_eq!(part_2(&input), todo!());
+        assert_eq!(part_2(input), 1);
     }
 }

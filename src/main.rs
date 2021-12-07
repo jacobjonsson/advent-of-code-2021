@@ -6,6 +6,7 @@ mod day_3;
 mod day_4;
 mod day_5;
 mod day_6;
+mod day_7;
 
 use std::time::Instant;
 
@@ -26,11 +27,15 @@ fn main() {
         "day_4" => day_4::run(),
         "day_5" => day_5::run(),
         "day_6" => day_6::run(),
+        "day_7" => day_7::run(),
         "all" => {
             day_1::run();
             day_2::run();
             day_3::run();
             day_4::run();
+            day_5::run();
+            day_6::run();
+            day_7::run();
         }
         _ => panic!("Provided day does not exists"),
     };
