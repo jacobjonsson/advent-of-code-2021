@@ -4,8 +4,8 @@ use std::collections::HashSet;
 pub fn run() {
     let input = include_str!("./input.txt");
 
-    println!("[DAY 7] Part 1: {}", part_1(&input));
-    println!("[DAY 7] Part 2: {}", part_2(&input));
+    println!("[DAY 8] Part 1: {}", part_1(&input));
+    println!("[DAY 8] Part 2: {}", part_2(&input));
 }
 
 fn is_easy_digit(p: &str) -> Option<u8> {
