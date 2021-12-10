@@ -46,14 +46,22 @@ impl Board {
 
     pub fn is_winner(&self) -> bool {
         for i in 0..5 {
-            let winner = self.marks.iter().filter(|((x, _), _)| x == &i).all(|(_, m)| *m);
+            let winner = self
+                .marks
+                .iter()
+                .filter(|((x, _), _)| x == &i)
+                .all(|(_, m)| *m);
             if winner {
                 return true;
             }
         }
 
         for j in 0..5 {
-            let winner = self.marks.iter().filter(|((_, y), _)| y == &j).all(|(_, m)| *m);
+            let winner = self
+                .marks
+                .iter()
+                .filter(|((_, y), _)| y == &j)
+                .all(|(_, m)| *m);
             if winner {
                 return true;
             }
@@ -76,14 +84,24 @@ impl Board {
 fn parse_input(input: &str) -> Result<(Vec<u64>, Vec<Board>)> {
     let mut lines = input.lines();
 
-    let numbers: Vec<u64> = lines.next().unwrap().split(",").filter_map(|n| n.parse().ok()).collect();
+    let numbers: Vec<u64> = lines
+        .next()
+        .unwrap()
+        .split(",")
+        .filter_map(|n| n.parse().ok())
+        .collect();
 
     let mut boards = Vec::new();
     let mut board_iter = lines.peekable();
 
     while board_iter.peek().is_some() {
-        let board: Board =
-            board_iter.by_ref().skip(1).take(5).map(|l| l.to_owned() + "\n").collect::<String>().parse()?;
+        let board: Board = board_iter
+            .by_ref()
+            .skip(1)
+            .take(5)
+            .map(|l| l.to_owned() + "\n")
+            .collect::<String>()
+            .parse()?;
 
         boards.push(board);
     }
