@@ -5,13 +5,6 @@ pub fn run() {
     println!("[DAY 10] Part 2: {}", part_2(&input));
 }
 
-fn is_closing(ch: char) -> bool {
-    match ch {
-        ')' | ']' | '}' | '>' => true,
-        _ => false,
-    }
-}
-
 fn open_to_closing(ch: char) -> char {
     match ch {
         '(' => ')',
@@ -22,38 +15,24 @@ fn open_to_closing(ch: char) -> char {
     }
 }
 
-fn char_score(ch: char) -> usize {
-    match ch {
-        ')' => 3,
-        ']' => 57,
-        '}' => 1197,
-        '>' => 25137,
-        _ => unreachable!(),
-    }
-}
-
 fn check_line(input: &str) -> Result<Vec<char>, char> {
     let mut chars = input.chars();
 
     let mut stack = vec![chars.next().unwrap()];
 
     for char in chars {
-        if is_closing(char) {
-            let expected = match stack.last().unwrap() {
-                '(' => ')',
-                '{' => '}',
-                '[' => ']',
-                '<' => '>',
-                _ => unreachable!(),
-            };
+        match char {
+            ')' | ']' | '}' | '>' => {
+                let expected = stack.last().map(|c| open_to_closing(*c)).unwrap();
 
-            if char == expected {
-                stack.pop();
-            } else {
-                return Err(char);
+                if char == expected {
+                    stack.pop();
+                } else {
+                    return Err(char);
+                }
             }
-        } else {
-            stack.push(char);
+
+            _ => stack.push(char),
         }
     }
 
@@ -65,7 +44,13 @@ fn part_1(input: &str) -> usize {
 
     for line in input.lines() {
         if let Err(ch) = check_line(line) {
-            scores += char_score(ch);
+            scores += match ch {
+                ')' => 3,
+                ']' => 57,
+                '}' => 1197,
+                '>' => 25137,
+                _ => unreachable!(),
+            };
         }
     }
 

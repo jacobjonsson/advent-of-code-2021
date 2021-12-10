@@ -49,5 +49,5 @@ fn main() {
         _ => panic!("Provided day does not exists"),
     };
 
-    println!("Program finished in {} seconds", start.elapsed().as_secs());
+    println!("Program finished in {} ms", start.elapsed().as_millis());
 }
