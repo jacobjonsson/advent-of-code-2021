@@ -7,8 +7,8 @@ pub fn run() {
     let part_1 = part_1(&input);
     let part_2 = part_2(&input);
 
-    println!("[DAY 3] Part 1: {}", part_1);
-    println!("[DAY 3] Part 2: {}", part_2);
+    println!("[DAY 5] Part 1: {}", part_1);
+    println!("[DAY 5] Part 2: {}", part_2);
 }
 
 fn part_1(input: &str) -> usize {
