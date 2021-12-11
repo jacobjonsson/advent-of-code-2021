@@ -53,39 +53,44 @@ fn get_adjacent(x: i32, y: i32, map: &OctopusMap) -> Vec<(usize, usize)> {
     .collect()
 }
 
+fn simulate(map: &mut OctopusMap) -> HashSet<(usize, usize)> {
+    increment_map(map);
+
+    let mut flash_stack = find_flashed(&map);
+    let mut flashed: HashSet<(usize, usize)> = HashSet::new();
+
+    for flash in flash_stack.iter() {
+        flashed.insert(*flash);
+    }
+
+    while !flash_stack.is_empty() {
+        let item = flash_stack.pop().unwrap();
+
+        let adjacent = get_adjacent(item.0 as i32, item.1 as i32, &map);
+
+        for adj in adjacent {
+            let item = map.get_mut(&adj).unwrap();
+            *item += 1;
+            if *item > 9 && !flashed.contains(&adj) {
+                flash_stack.push(adj);
+                flashed.insert(adj);
+            }
+        }
+    }
+
+    map.iter_mut()
+        .filter(|(_, o)| **o > 9)
+        .for_each(|(_, o)| *o = 0);
+
+    flashed
+}
+
 fn part_1(input: &str) -> usize {
     let mut map = parse_input(input);
     let mut flashes = 0;
 
     for _ in 0..100 {
-        increment_map(&mut map);
-
-        let mut flash_stack = find_flashed(&map);
-        let mut flashed: HashSet<(usize, usize)> = HashSet::new();
-
-        for flash in flash_stack.iter() {
-            flashed.insert(*flash);
-        }
-
-        while !flash_stack.is_empty() {
-            let item = flash_stack.pop().unwrap();
-
-            let adjacent = get_adjacent(item.0 as i32, item.1 as i32, &map);
-
-            for adj in adjacent {
-                let item = map.get_mut(&adj).unwrap();
-                *item += 1;
-                if *item > 9 && !flashed.contains(&adj) {
-                    flash_stack.push(adj);
-                    flashed.insert(adj);
-                }
-            }
-        }
-
-        flashes += flashed.len();
-        map.iter_mut()
-            .filter(|(_, o)| **o > 9)
-            .for_each(|(_, o)| *o = 0);
+        flashes += simulate(&mut map).len();
     }
 
     flashes
@@ -93,39 +98,10 @@ fn part_1(input: &str) -> usize {
 
 fn part_2(input: &str) -> usize {
     let mut map = parse_input(input);
+    let grid_width = map.keys().filter(|(x, _)| *x == 0).count();
 
     for step in 0..9999 {
-        increment_map(&mut map);
-
-        let mut flash_stack = find_flashed(&map);
-        let mut flashed: HashSet<(usize, usize)> = HashSet::new();
-
-        for flash in flash_stack.iter() {
-            flashed.insert(*flash);
-        }
-
-        while !flash_stack.is_empty() {
-            let item = flash_stack.pop().unwrap();
-
-            let adjacent = get_adjacent(item.0 as i32, item.1 as i32, &map);
-
-            for adj in adjacent {
-                let item = map.get_mut(&adj).unwrap();
-                *item += 1;
-                if *item > 9 && !flashed.contains(&adj) {
-                    flash_stack.push(adj);
-                    flashed.insert(adj);
-                }
-            }
-        }
-
-        map.iter_mut()
-            .filter(|(_, o)| **o > 9)
-            .for_each(|(_, o)| *o = 0);
-
-        let grid_width = map.keys().filter(|(x, _)| *x == 0).count();
-
-        if grid_width * grid_width == flashed.len() {
+        if grid_width * grid_width == simulate(&mut map).len() {
             return step + 1;
         }
     }
