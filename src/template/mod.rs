@@ -17,17 +17,15 @@ fn part_2(input: &str) -> usize {
 mod tests {
     use super::*;
 
+    const INPUT: &str = "";
+
     #[test]
     fn test_part_1() {
-        let input = "";
-
-        assert_eq!(part_1(input), 1);
+        assert_eq!(part_1(INPUT), 1);
     }
 
     #[test]
     fn test_part_2() {
-        let input = "";
-
-        assert_eq!(part_2(input), 1);
+        assert_eq!(part_2(INPUT), 1);
     }
 }
